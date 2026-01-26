@@ -1,0 +1,17 @@
+{
+  "counter": 3,
+  "users": {
+    "556842153314091010": {
+      "username": "bodya1066",
+      "avatar": "2cdc6ed27aa52287d7ed317537f64ff9",
+      "number": 1,
+      "joined": "2026-01"
+    },
+    "1311243989621407779": {
+      "username": "2tonnymontana2",
+      "avatar": "ff1788b8e121894215e4601644b65286",
+      "number": 2,
+      "joined": "2026-01"
+    }
+  }
+}

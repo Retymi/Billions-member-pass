@@ -66,9 +66,9 @@ btn.addEventListener("click", async () => {
   // 🔹 TEXT FOR X
   const text = encodeURIComponent(
     "MEMBER PASS OF @billions_ntwk\n\n" +
-    "I am a member of the community @jgonzalezferrer\n" +
+    "I am a member of the community . We miss you @jgonzalezferrer\n" +
     "Thank you @VovaVovavolik for such a Card\n\n" +
-    "👉 https://YOUR-SITE-LINK"
+    "👉 https://billions-member-pass.vercel.app/"
   );
 
   // 🔹 OPEN X

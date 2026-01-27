@@ -26,7 +26,7 @@ btn.addEventListener("click", async () => {
 
   // 1️⃣ НЕ ЗАЛОГІНЕНИЙ → DISCORD LOGIN
   if (!params.has("username")) {
-    window.location.href = "/login";
+    window.location.href = "/api/login";
     return;
   }
 

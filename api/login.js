@@ -1,22 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Member Pass</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+export default function handler(req, res) {
+  if (!process.env.DISCORD_CLIENT_ID || !process.env.DISCORD_REDIRECT_URI) {
+    return res.status(500).send("Discord env vars not set");
+  }
 
-<div class="bg"></div>
+  const params = new URLSearchParams({
+    client_id: process.env.DISCORD_CLIENT_ID,
+    redirect_uri: process.env.DISCORD_REDIRECT_URI,
+    response_type: "code",
+    scope: "identify"
+  });
 
-<div class="container">
-  <div class="title">Member Pass</div>
-
-  <button class="action"
-    onclick="window.location.href='/api/login'">
-    Login with Discord
-  </button>
-</div>
-
-</body>
-</html>
+  res.redirect(
+    "https://discord.com/api/oauth2/authorize?" + params.toString()
+  );
+}

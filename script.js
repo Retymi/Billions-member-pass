@@ -68,14 +68,9 @@ if (params.has("username")) {
   const avatarHash = params.get("avatar");
 
   // ----- MEMBER NUMBER (random, persistent per user) -----
-  let userNumber = localStorage.getItem(`billions_user_${userId}`);
+const userNumber = Math.floor(Math.random() * 9999) + 1;
+const formatted = String(userNumber).padStart(4, "0");
 
-  if (!userNumber) {
-    userNumber = Math.floor(Math.random() * 9999) + 1;
-    localStorage.setItem(`billions_user_${userId}`, userNumber);
-  }
-
-  const formatted = String(userNumber).padStart(4, "0");
 
   // ----- TEXT -----
   username.textContent = params.get("username");

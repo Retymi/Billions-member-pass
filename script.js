@@ -1,13 +1,19 @@
+const loginBtn = document.getElementById("loginBtn");
+
+// 1. КНОПКА ЛОГІНУ (якщо не залогінений)
+if (loginBtn) {
+  loginBtn.addEventListener("click", () => {
+    window.location.href = "/api/login";
+  });
+}
+
+// 2. ПЕРЕВІРКА СЕСІЇ (після логіну)
 fetch("/api/me")
   .then(res => res.json())
   .then(data => {
     if (!data.loggedIn) return;
 
     const user = data.user;
-
-    const card = document.querySelector(".card");
-    card.classList.remove("not-connected");
-    card.classList.add("connected");
 
     // username
     document.querySelector(".status").innerText = user.username;
@@ -22,7 +28,8 @@ fetch("/api/me")
       `url(https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png)`;
 
     // show right side
-    document.getElementById("right").classList.remove("hidden");
+    const right = document.getElementById("right");
+    if (right) right.classList.remove("hidden");
 
     // member id
     const year = new Date().getFullYear();
@@ -30,7 +37,6 @@ fetch("/api/me")
       `BLN-${year}-0001`;
 
     // button state
-    const loginBtn = document.getElementById("loginBtn");
     loginBtn.innerText = "Connected";
     loginBtn.classList.add("connected");
     loginBtn.disabled = true;

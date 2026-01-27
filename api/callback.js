@@ -27,6 +27,6 @@ export default async function handler(req, res) {
 
   // 👉 редірект назад на сайт з даними
   res.redirect(
-    `/?id=${user.id}&username=${encodeURIComponent(user.username)}`
-  );
-}
+  `/pass.html?id=${user.id}&username=${encodeURIComponent(user.username)}`
+);
+

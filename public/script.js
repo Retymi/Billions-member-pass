@@ -38,7 +38,7 @@ btn.addEventListener("click", async () => {
   const params = new URLSearchParams(window.location.search);
 
   if (!params.has("username")) {
-    window.location.href = "/login";
+    window.location.href = "/api/login";
     return;
   }
 

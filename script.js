@@ -76,14 +76,17 @@ if (params.has("username")) {
   const userId = params.get("id");
   const avatarHash = params.get("avatar");
 
-// ----- MEMBER NUMBER (RANDOM) -----
-function randomMemberNumber() {
-  return Math.floor(1000 + Math.random() * 9000); // 1000–9999
-}
+  // ----- MEMBER ORDER (local) -----
+  let counter = localStorage.getItem("billions_counter");
+  if (!counter) counter = 0;
 
-const userNumber = randomMemberNumber();
-const formatted = String(userNumber).padStart(4, "0");
+  let userNumber = localStorage.getItem(`billions_user_${userId}`);
 
+  if (!userNumber) {
+    counter++;
+    userNumber = counter;
+    localStorage.setItem("billions_counter", counter);
+    localStorage.setItem(`billions_user_${userId}`, userNumber);
   }
 
   const formatted = String(userNumber).padStart(4, "0");

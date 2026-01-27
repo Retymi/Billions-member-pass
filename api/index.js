@@ -7,7 +7,6 @@ const fetch = (...args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(...args));
 
 const app = express();
-const PORT = 3000;
 
 // 🔐 DISCORD DATA (ПІДСТАВ СВОЇ)
 const CLIENT_ID = "1463949874553950353";
@@ -103,3 +102,5 @@ app.post("/api/user", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
+
+module.exports = app;

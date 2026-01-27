@@ -1,43 +1,48 @@
-const loginBtn = document.getElementById("loginBtn");
+alert("SCRIPT LOADED");
 
-// 1. КНОПКА ЛОГІНУ (якщо не залогінений)
-if (loginBtn) {
-  loginBtn.addEventListener("click", () => {
-    window.location.href = "/api/login";
-  });
-}
+const avatarEl = document.getElementById("avatar");
+const usernameEl = document.getElementById("username");
+const line1El = document.getElementById("line1");
+const line2El = document.getElementById("line2");
+const rightTextEl = document.getElementById("rightText");
+const memberIdEl = document.getElementById("memberId");
+const actionBtn = document.getElementById("actionBtn");
 
-// 2. ПЕРЕВІРКА СЕСІЇ (після логіну)
+// 1. перевіряємо чи залогінений
 fetch("/api/me")
   .then(res => res.json())
   .then(data => {
-    if (!data.loggedIn) return;
+    if (!data.connected) return;
 
     const user = data.user;
 
-    // username
-    document.querySelector(".status").innerText = user.username;
-    document.querySelector(".status-sub").innerHTML =
-      `<span class="gold">#0001</span><br>Member since Jan 2026`;
+    // Аватар
+    avatarEl.style.backgroundImage = `url(https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png)`;
+    avatarEl.textContent = "";
 
-    // avatar (DIV, не IMG)
-    const avatarEl = document.getElementById("avatar");
-    avatarEl.classList.remove("not-connected");
-    avatarEl.innerHTML = "";
-    avatarEl.style.backgroundImage =
-      `url(https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png)`;
+    // Імʼя
+    usernameEl.textContent = user.username;
 
-    // show right side
-    const right = document.getElementById("right");
-    if (right) right.classList.remove("hidden");
+    // Текст
+    line1El.textContent = "#0001";
+    line2El.textContent = "Member since Jan 2026";
 
-    // member id
-    const year = new Date().getFullYear();
-    document.getElementById("memberId").innerText =
-      `BLN-${year}-0001`;
+    // Права частина
+    rightTextEl.innerHTML = `
+      YOU ARE IN<br/>
+      THE<br/>
+      COMMUNITY
+    `;
 
-    // button state
-    loginBtn.innerText = "Connected";
-    loginBtn.classList.add("connected");
-    loginBtn.disabled = true;
+    // ID
+    memberIdEl.textContent = "BLN-2026-0001";
+
+    // Кнопка
+    actionBtn.textContent = "Connected";
+    actionBtn.disabled = true;
   });
+
+// 2. кнопка логіну
+actionBtn.addEventListener("click", () => {
+  window.location.href = "/api/login";
+});

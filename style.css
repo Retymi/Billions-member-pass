@@ -1,154 +1,33 @@
-* {
-  box-sizing: border-box;
-}
-
 body {
-  margin: 0;
-  height: 100vh;
-  font-family: Inter, Arial, sans-serif;
-  color: #fff;
-  background: radial-gradient(
-    circle at top left,
-    #1a1408 0%,
-    #0b1220 40%,
-    #050b16 100%
-  );
-}
-
-/* STARS */
-.bg {
-  position: fixed;
-  inset: 0;
-  background-image: radial-gradient(#ffd24d 1px, transparent 1px);
-  background-size: 120px 120px;
-  opacity: 0.12;
-  pointer-events: none;
-}
-
-.container {
-  position: relative;
-  z-index: 1;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 22px;
-}
-
-.subtitle {
-  color: #ffd24d;
-  letter-spacing: 3px;
-  font-size: 12px;
-}
-
-.title {
-  font-size: 44px;
-  font-weight: 700;
-}
-
-.card {
-  width: 560px;
-  min-height: 260px;
-  padding: 28px;
-  border-radius: 26px;
-  border: 3px solid #ffd24d;
-  background: linear-gradient(145deg, #0b1422, #050b16);
-  box-shadow: 0 0 40px rgba(255,210,77,0.25);
-  display: flex;
-  justify-content: space-between;
-  position: relative;
-}
-
-.left {
-  width: 55%;
-}
-
-.brand {
-  color: #ffd24d;
-  font-size: 26px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  margin-bottom: 18px;
-}
-
-.avatar {
-  width: 86px;
-  height: 86px;
-  border-radius: 50%;
-  border: 3px solid #ffd24d;
-  margin-bottom: 14px;
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.avatar.not-connected span {
-  font-size: 34px;
-}
-
-.status {
-  font-size: 20px;
-  font-weight: 600;
-}
-
-.status-sub {
-  margin-top: 6px;
-  color: #ffd24d;
-}
-
-.gold {
-  color: #ffd24d;
-}
-
-.right {
-  width: 40%;
-  text-align: right;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.community {
-  color: #6f86ff;
-  letter-spacing: 4px;
-  line-height: 1.6;
-  font-size: 14px;
-}
-
-.member-id {
-  font-size: 14px;
-  color: #ffd24d;
-}
-
-.footer {
-  position: absolute;
-  bottom: 18px;
-  left: 28px;
-  color: #ffd24d;
-  font-size: 12px;
-  letter-spacing: 2px;
-}
-
-.action {
-  margin-top: 10px;
-  padding: 14px 40px;
-  border-radius: 999px;
-  border: none;
-  background: #5865f2;
-  color: #fff;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.action.connected {
-  background: #5865f2;
-  cursor: default;
+  background: radial-gradient(#0b1020, #000);
+  color: white;
+  text-align: center;
+  font-family: Inter, sans-serif;
 }
 
 .hidden {
   display: none;
+}
+
+.card {
+  border: 2px solid gold;
+  border-radius: 20px;
+  padding: 30px;
+  width: 320px;
+  margin: 40px auto;
+}
+
+.card img {
+  width: 100px;
+  border-radius: 50%;
+}
+
+.login-btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 14px 28px;
+  background: #5865f2;
+  color: white;
+  border-radius: 30px;
+  text-decoration: none;
 }

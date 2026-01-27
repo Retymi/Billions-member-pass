@@ -1,48 +1,43 @@
-alert("SCRIPT LOADED");
+async function init() {
+  const btn = document.getElementById("actionBtn");
 
-const avatarEl = document.getElementById("avatar");
-const usernameEl = document.getElementById("username");
-const line1El = document.getElementById("line1");
-const line2El = document.getElementById("line2");
-const rightTextEl = document.getElementById("rightText");
-const memberIdEl = document.getElementById("memberId");
-const actionBtn = document.getElementById("actionBtn");
+  try {
+    const res = await fetch("/api/me");
+    if (!res.ok) throw new Error("Not logged");
 
-// 1. перевіряємо чи залогінений
-fetch("/api/me")
-  .then(res => res.json())
-  .then(data => {
-    if (!data.connected) return;
+    const user = await res.json();
 
-    const user = data.user;
+    // --- UI ---
+    document.getElementById("avatar").src =
+      `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`;
+    document.getElementById("avatar").style.display = "block";
+    document.getElementById("avatarPlaceholder").style.display = "none";
 
-    // Аватар
-    avatarEl.style.backgroundImage = `url(https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png)`;
-    avatarEl.textContent = "";
+    document.getElementById("username").innerText = user.username;
+    document.getElementById("line1").innerText = "#0001";
+    document.getElementById("line2").innerText = "Member since Jan 2026";
+    document.getElementById("rightText").innerText =
+      "YOU ARE IN THE\nCOMMUNITY";
 
-    // Імʼя
-    usernameEl.textContent = user.username;
+    // --- MEMBER ID (AUTO INCREMENT) ---
+    let counter = localStorage.getItem("bln_counter");
+    if (!counter) counter = 1;
+    else counter = parseInt(counter) + 1;
 
-    // Текст
-    line1El.textContent = "#0001";
-    line2El.textContent = "Member since Jan 2026";
+    localStorage.setItem("bln_counter", counter);
 
-    // Права частина
-    rightTextEl.innerHTML = `
-      YOU ARE IN<br/>
-      THE<br/>
-      COMMUNITY
-    `;
+    const formatted = String(counter).padStart(4, "0");
+    document.getElementById("memberId").innerText =
+      `BLN-2026-${formatted}`;
 
-    // ID
-    memberIdEl.textContent = "BLN-2026-0001";
+    btn.innerText = "Connected";
+    btn.disabled = true;
 
-    // Кнопка
-    actionBtn.textContent = "Connected";
-    actionBtn.disabled = true;
-  });
+  } catch {
+    btn.onclick = () => {
+      window.location.href = "/api/login";
+    };
+  }
+}
 
-// 2. кнопка логіну
-actionBtn.addEventListener("click", () => {
-  window.location.href = "/api/login";
-});
+init();

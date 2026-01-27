@@ -1,38 +1,37 @@
-const params = new URLSearchParams(window.location.search);
+fetch("/api/me")
+  .then(res => res.json())
+  .then(data => {
+    if (!data.loggedIn) return;
 
-const id = params.get("id");
-const username = params.get("username");
-const avatar = params.get("avatar");
+    const user = data.user;
 
-const avatarEl = document.getElementById("avatar");
-const statusTitle = document.getElementById("statusTitle");
-const statusSub = document.getElementById("statusSub");
-const right = document.getElementById("right");
-const memberId = document.getElementById("memberId");
-const loginBtn = document.getElementById("loginBtn");
+    const card = document.querySelector(".card");
+    card.classList.remove("not-connected");
+    card.classList.add("connected");
 
-if (id && username) {
-  // CONNECTED STATE
+    // username
+    document.querySelector(".status").innerText = user.username;
+    document.querySelector(".status-sub").innerHTML =
+      `<span class="gold">#0001</span><br>Member since Jan 2026`;
 
-  avatarEl.classList.remove("not-connected");
-  avatarEl.style.backgroundImage =
-    `url(https://cdn.discordapp.com/avatars/${id}/${avatar}.png)`;
-  avatarEl.innerHTML = "";
+    // avatar (DIV, не IMG)
+    const avatarEl = document.getElementById("avatar");
+    avatarEl.classList.remove("not-connected");
+    avatarEl.innerHTML = "";
+    avatarEl.style.backgroundImage =
+      `url(https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png)`;
 
-  statusTitle.innerText = username;
-  statusSub.innerHTML = `<span class="gold">#0001</span><br>Member since Jan 2026`;
+    // show right side
+    document.getElementById("right").classList.remove("hidden");
 
-  right.classList.remove("hidden");
+    // member id
+    const year = new Date().getFullYear();
+    document.getElementById("memberId").innerText =
+      `BLN-${year}-0001`;
 
-  const year = new Date().getFullYear();
-  memberId.innerText = `BLN-${year}-0001`;
-
-  loginBtn.innerText = "Connected";
-  loginBtn.classList.add("connected");
-  loginBtn.disabled = true;
-} else {
-  // NOT CONNECTED
-  loginBtn.onclick = () => {
-    window.location.href = "/api/login";
-  };
-}
+    // button state
+    const loginBtn = document.getElementById("loginBtn");
+    loginBtn.innerText = "Connected";
+    loginBtn.classList.add("connected");
+    loginBtn.disabled = true;
+  });

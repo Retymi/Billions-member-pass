@@ -8,15 +8,13 @@ body {
   color: #fff;
   display: flex;
   justify-content: center;
-
   min-height: 250vh;
-  overflow: hidden; /* 🔥 ОЦЕ ФІКС */
+  overflow: hidden;
 
   background:
     radial-gradient(circle at 120% 10%, rgba(245, 200, 75, 0.12), transparent 60%),
     radial-gradient(circle at 10% 70%, rgba(88, 201, 242, 0.15), transparent 45%),
     radial-gradient(circle at center, #0b1020, #020617 70%);
-
 }
 
 /* ================= FIREFLIES ================= */
@@ -36,7 +34,7 @@ body {
   border-radius: 100%;
   opacity: 0.8;
   box-shadow:
-   1 0 8px rgba(245, 200, 75, 0.9),
+    0 0 8px rgba(245, 200, 75, 0.9),
     0 0 20px rgba(245, 200, 75, 0.4);
   animation: fly linear infinite;
 }
@@ -58,7 +56,7 @@ body {
 /* ================= PAGE ================= */
 
 :root {
-  --page-scale: 1.1; /* 👈 ТУТ РЕГУЛЮЄШ */
+  --page-scale: 1.1;
 }
 
 .page {
@@ -66,16 +64,8 @@ body {
   padding-top: 60px;
   position: relative;
   z-index: 1;
-
   transform: scale(var(--page-scale));
   transform-origin: top center;
-}
-
-.page {
-  text-align: center;
-  padding-top: 60px;
-  position: relative;
-  z-index: 1;
 }
 
 /* ================= TITLE ================= */
@@ -105,7 +95,6 @@ body {
   position: relative;
   border-radius: 22px;
 
-  /* 🟡 ЗОЛОТА ОБВОДКА */
   border: 3px solid transparent;
   background:
     linear-gradient(#050b16, #000) padding-box,
@@ -117,11 +106,31 @@ body {
       #f5c84b
     ) border-box;
 
-  /* ✨ ГЛИБИНА */
+  /* 🔥 ГЛИБИНА */
   box-shadow:
-    0 55px 60px rgba(0, 0, 0, 0.75),
-    0 0 35px rgba(245, 200, 65, 1.25),
-    inset 0 0 25px rgba(145, 55, 75, 0.1);
+    0 30px 40px rgba(0, 0, 0, 0.65),
+    0 60px 120px rgba(0, 0, 0, 0.85),
+    0 0 45px rgba(245, 200, 75, 0.35),
+    inset 0 0 30px rgba(255, 255, 255, 0.03);
+
+  transform-style: preserve-3d;
+  perspective: 1200px;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.06), transparent 45%),
+    radial-gradient(circle at 70% 80%, rgba(245, 200, 75, 0.08), transparent 50%);
+  pointer-events: none;
+}
+
+.card:hover {
+  transform: translateY(-6px) scale(1.01);
 }
 
 /* ================= TOP ================= */
@@ -137,8 +146,8 @@ body {
   font-size: 26px;
   letter-spacing: 4px;
   text-shadow:
-    0 0 10px rgba(245, 200, 75, 0.8),
-    0 0 25px rgba(245, 200, 75, 0.4);
+    0 2px 6px rgba(0, 0, 0, 0.6),
+    0 0 10px rgba(245, 200, 75, 0.25);
 }
 
 .logo {
@@ -173,14 +182,11 @@ body {
   background-size: cover;
   background-position: center;
   flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 28px;
 
   box-shadow:
-    0 0 12px rgba(245, 200, 75, 0.8),
-    inset 0 0 8px rgba(245, 200, 75, 0.25);
+    0 8px 18px rgba(0, 0, 0, 0.6),
+    0 0 14px rgba(245, 200, 75, 0.9),
+    inset 0 0 10px rgba(255, 255, 255, 0.12);
 }
 
 /* ================= USER ================= */
@@ -218,7 +224,6 @@ body {
   text-transform: uppercase;
   margin-top: 35px;
   margin-left: 40px;
-  white-space: normal;
   text-align: center;
   line-height: 1.4;
 
@@ -247,8 +252,6 @@ body {
 
 .member-label {
   font-size: 10px;
-  margin-top: 54px;
-  margin-left: 0px;
   color: #f5c84b;
   text-align: right;
 }
@@ -290,18 +293,8 @@ body {
   font-size: 10px;
   opacity: 0.6;
 }
-.brand-link {
-  display: flex;
-  align-items: center;
-}
 
-.brand-logo {
-  width: 46px;
-  height: 46px;
-  object-fit: contain;
-  cursor: pointer;
-}
-/* ===== EXPORT MODE (PNG FIX) ===== */
+/* ===== EXPORT MODE ===== */
 
 .card.exporting {
   box-shadow: none !important;
@@ -310,23 +303,4 @@ body {
 .card.exporting * {
   box-shadow: none !important;
   filter: none !important;
-}
-/* ===== FOOTER LINK ===== */
-
-:root {
-  --footer-size: 11px; /* 👈 тут регулюєш розмір */
-}
-
-.footer-link {
-  color: #ffffff;          /* білий */
-  font-size: var(--footer-size);
-  text-decoration: none;
-  cursor: pointer;
-  letter-spacing: 3px;
-  opacity: 5.8;
-  transition: opacity 0.2s ease;
-}
-
-.footer-link:hover {
-  opacity: 1;
 }

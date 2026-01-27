@@ -95,9 +95,9 @@ body {
   position: relative;
   border-radius: 22px;
 
-  border: 3px solid transparent;
+  /* ❗ ЄДИНА КРИТИЧНА ЗМІНА — FLAT BACKGROUND */
   background:
-    linear-gradient(#050b16, #000) padding-box,
+    #050b16 padding-box,
     linear-gradient(
       135deg,
       #f5c84b,
@@ -105,6 +105,8 @@ body {
       #caa13d,
       #f5c84b
     ) border-box;
+
+  border: 3px solid transparent;
 
   box-shadow:
     0 80px 90px rgba(0, 0, 0, 0.95),
@@ -114,20 +116,6 @@ body {
     inset 0 -15px 25px rgba(0, 0, 0, 0.6);
 
   transition: transform 0.5s ease, box-shadow 0.5s ease;
-}
-
-/* 🔥 ANTI-TWITTER COMPRESSION FIX */
-.card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 22px;
-  pointer-events: none;
-
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='1'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
-
-  mix-blend-mode: overlay;
-  opacity: 0.35;
 }
 
 .card:hover {

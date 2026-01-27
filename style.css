@@ -295,3 +295,15 @@ body {
   box-shadow: none !important;
   filter: none !important;
 }
+
+/* ================= CARD LOGO ================= */
+
+.card-logo {
+  width: 35px;
+  height: 35px;
+  object-fit: contain;
+
+  opacity: 0.95;
+
+  filter: drop-shadow(0 0 8px rgba(88, 101, 242, 0.85));
+}

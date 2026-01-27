@@ -1,70 +1,54 @@
-const btn = document.getElementById("actionBtn");
+// отримуємо елементи з твого HTML
+const avatarEl = document.getElementById("avatar");
 const usernameEl = document.getElementById("username");
-const line1 = document.getElementById("line1");
-const line2 = document.getElementById("line2");
-const rightText = document.getElementById("rightText");
-const memberId = document.getElementById("memberId");
-const footer = document.getElementById("footer");
-const avatar = document.getElementById("avatar");
+const line1El = document.getElementById("line1");
+const line2El = document.getElementById("line2");
+const rightTextEl = document.getElementById("rightText");
+const memberIdEl = document.getElementById("memberId");
+const actionBtn = document.getElementById("actionBtn");
 
-const params = new URLSearchParams(window.location.search);
-
-// ===== BUTTON =====
-btn.addEventListener("click", () => {
-  if (!params.has("username")) {
-    window.location.href = "/api/login";
-  }
+// 1. кнопка логіну
+actionBtn.addEventListener("click", () => {
+  window.location.href = "/api/login";
 });
 
-// ===== AFTER LOGIN =====
-if (params.has("username")) {
-  const userId = params.get("id");
-  const avatarHash = params.get("avatar");
-  const username = params.get("username");
+// 2. перевірка, чи користувач залогінений
+fetch("/api/me")
+  .then(res => res.json())
+  .then(data => {
+    if (!data.connected) {
+      // NOT CONNECTED — залишаємо дизайн як є
+      return;
+    }
 
-  // порядковий номер (локально)
-  let counter = localStorage.getItem("billions_counter");
-  if (!counter) counter = 0;
+    const user = data.user;
 
-  let userNumber = localStorage.getItem(`billions_user_${userId}`);
-  if (!userNumber) {
-    counter++;
-    userNumber = counter;
-    localStorage.setItem("billions_counter", counter);
-    localStorage.setItem(`billions_user_${userId}`, userNumber);
-  }
+    // аватар
+    avatarEl.style.backgroundImage =
+      `url(https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png)`;
+    avatarEl.textContent = "";
 
-  const formatted = String(userNumber).padStart(4, "0");
+    // імʼя
+    usernameEl.textContent = user.username;
 
-  // TEXT
-  usernameEl.textContent = username;
-  line1.textContent = `#${formatted}`;
-  line2.textContent = "Member since Jan 2026";
-  rightText.textContent = "YOU ARE IN THE COMMUNITY";
+    // тексти
+    line1El.textContent = "#0001";
+    line2El.textContent = "Member since Jan 2026";
 
-  memberId.textContent = `BLN-2026-${formatted}`;
+    // правий текст
+    rightTextEl.innerHTML = `
+      YOU ARE IN<br>
+      THE<br>
+      COMMUNITY
+    `;
 
-// ===== MEMBER NUMBER (RANDOM) =====
-const randomNumber = Math.floor(Math.random() * 9999) + 1;
+    // member id
+    memberIdEl.textContent = "BLN-2026-0001";
 
-// #0001 формат
-const memberTag = `#${String(randomNumber).padStart(4, "0")}`;
-
-// BLN-2026-0001 формат
-const memberId = `BLN-2026-${String(randomNumber).padStart(4, "0")}`;
-
-document.getElementById("memberTag").textContent = memberTag;
-document.getElementById("memberId").textContent = memberId;
-
-  // AVATAR
-  avatar.textContent = "";
-  avatar.style.backgroundImage =
-    `url(https://cdn.discordapp.com/avatars/${userId}/${avatarHash}.png)`;
-  avatar.style.backgroundSize = "cover";
-  avatar.style.backgroundPosition = "center";
-
-  // UI
-  btn.textContent = "Connected";
-  btn.disabled = true;
-  footer.style.display = "block";
-}
+    // кнопка
+    actionBtn.textContent = "Connected";
+    actionBtn.disabled = true;
+  })
+  .catch(err => {
+    console.error("ME ERROR:", err);
+  });

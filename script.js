@@ -1,36 +1,58 @@
-const loginBtn = document.getElementById("loginBtn");
+const btn = document.getElementById("actionBtn");
+const usernameEl = document.getElementById("username");
+const line1 = document.getElementById("line1");
+const line2 = document.getElementById("line2");
+const rightText = document.getElementById("rightText");
+const memberId = document.getElementById("memberId");
+const footer = document.getElementById("footer");
+const avatar = document.getElementById("avatar");
 
-loginBtn.onclick = () => {
-  window.location.href = "/api/login";
-};
+const params = new URLSearchParams(window.location.search);
 
-async function loadUser() {
-  try {
-    const res = await fetch("/api/me");
-    if (!res.ok) return;
-
-    const user = await res.json();
-
-    // AVATAR
-    const avatar = document.getElementById("avatar");
-    avatar.innerHTML = `<img src="${user.avatar}" />`;
-
-    // USERNAME
-    document.getElementById("username").innerText = user.username;
-    document.getElementById("tagline").innerText = "#0001\nMember since Jan 2026";
-
-    // RIGHT TEXT
-    document.getElementById("communityText").innerText =
-      "YOU ARE IN\nTHE\nCOMMUNITY";
-
-    // MEMBER ID (поки простий)
-    document.getElementById("memberId").innerText = "BLN-2026-0001";
-
-    loginBtn.innerText = "Connected";
-    loginBtn.disabled = true;
-  } catch (e) {
-    console.log("Not logged in");
+// ===== BUTTON =====
+btn.addEventListener("click", () => {
+  if (!params.has("username")) {
+    window.location.href = "/api/login";
   }
-}
+});
 
-loadUser();
+// ===== AFTER LOGIN =====
+if (params.has("username")) {
+  const userId = params.get("id");
+  const avatarHash = params.get("avatar");
+  const username = params.get("username");
+
+  // порядковий номер (локально)
+  let counter = localStorage.getItem("billions_counter");
+  if (!counter) counter = 0;
+
+  let userNumber = localStorage.getItem(`billions_user_${userId}`);
+  if (!userNumber) {
+    counter++;
+    userNumber = counter;
+    localStorage.setItem("billions_counter", counter);
+    localStorage.setItem(`billions_user_${userId}`, userNumber);
+  }
+
+  const formatted = String(userNumber).padStart(4, "0");
+
+  // TEXT
+  usernameEl.textContent = username;
+  line1.textContent = `#${formatted}`;
+  line2.textContent = "Member since Jan 2026";
+  rightText.textContent = "YOU ARE IN THE COMMUNITY";
+
+  memberId.textContent = `BLN-2026-${formatted}`;
+
+  // AVATAR
+  avatar.textContent = "";
+  avatar.style.backgroundImage =
+    `url(https://cdn.discordapp.com/avatars/${userId}/${avatarHash}.png)`;
+  avatar.style.backgroundSize = "cover";
+  avatar.style.backgroundPosition = "center";
+
+  // UI
+  btn.textContent = "Connected";
+  btn.disabled = true;
+  footer.style.display = "block";
+}

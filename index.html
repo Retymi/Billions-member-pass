@@ -2,45 +2,54 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Billions Member Pass</title>
+  <title>Member Pass</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- TOP TEXT -->
-  <div class="top-text">EXCLUSIVE ACCESS</div>
-  <h1 class="title">Member Pass</h1>
+<div class="fireflies"></div>
 
-  <!-- CARD -->
+<div class="page">
+  <div class="subtitle">EXCLUSIVE ACCESS</div>
+  <div class="maintitle">Member Pass</div>
+
   <div class="card">
 
-    <!-- LEFT -->
-    <div class="left">
-      <div id="avatar" class="avatar">?</div>
-
-      <div class="username" id="username">Not Connected</div>
-      <div class="subtext" id="tagline">Login to reveal your pass</div>
-
-      <div class="network">BILLIONS NETWORK</div>
+    <div class="top">
+      <div class="brand">BILLIONS</div>
     </div>
 
-    <!-- RIGHT -->
-    <div class="right">
-      <div class="community" id="communityText"></div>
+    <div class="middle">
+      <div class="left-block">
+        <div class="avatar" id="avatar">?</div>
 
-      <div class="member-id">
-        MEMBER ID<br />
-        <span id="memberId">----</span>
+        <div class="user">
+          <div class="username" id="username">Not Connected</div>
+          <div class="line1" id="line1">Login to reveal your pass</div>
+          <div class="line2" id="line2">BILLIONS NETWORK</div>
+        </div>
+      </div>
+
+      <div class="right-text" id="rightText"></div>
+    </div>
+
+    <div class="bottom">
+      <div class="network">BILLIONS NETWORK</div>
+      <div class="member">
+        <div class="member-label">MEMBER ID</div>
+        <div class="member-value" id="memberId">----</div>
       </div>
     </div>
 
   </div>
 
-  <!-- BUTTON -->
-  <button id="loginBtn" class="login-btn">Login with Discord</button>
+  <button class="action" id="actionBtn">Login with Discord</button>
 
-  <div class="footer">POWER BY RETYMI</div>
+  <div class="footer" id="footer" style="display:none;">
+    <span class="footer-link">POWER BY RETYMI</span>
+  </div>
+</div>
 
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>

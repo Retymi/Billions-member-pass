@@ -23,10 +23,9 @@ export default async function handler(req, res) {
 
   const user = await userRes.json();
 
-  res.setHeader(
-    "Set-Cookie",
-    `user=${encodeURIComponent(JSON.stringify(user))}; Path=/; HttpOnly`
+  res.redirect(
+    `/?username=${encodeURIComponent(user.username)}` +
+    `&id=${user.id}` +
+    `&avatar=${user.avatar}`
   );
-
-  res.redirect("/");
 }

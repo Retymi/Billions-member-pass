@@ -1,19 +1,64 @@
+<div style="position:fixed;top:0;left:0;background:red;color:white;z-index:9999">
+  TEST 123
+</div>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Billions Member Pass</title>
+  <title>Member Pass</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="page">
-  <h1>Member Pass</h1>
+<div class="bg"></div>
 
-  <button class="action" onclick="window.location.href='/api/login'">
+<div class="container">
+  <div class="subtitle">EXCLUSIVE ACCESS</div>
+  <div class="title">Member Pass</div>
+
+  <div class="card">
+
+    <!-- LEFT -->
+    <div class="left">
+      <div class="brand">BILLIONS</div>
+
+      <!-- NOT CONNECTED -->
+      <div class="avatar not-connected" id="avatar">
+        <span>?</span>
+      </div>
+
+      <div class="status" id="statusTitle">Not Connected</div>
+      <div class="status-sub" id="statusSub">
+        Login to reveal your pass
+      </div>
+    </div>
+
+    <!-- RIGHT (тільки після логіну) -->
+    <div class="right hidden" id="right">
+      <div class="community">
+        YOU ARE IN<br>THE COMMUNITY
+      </div>
+
+      <div class="member-id">
+        MEMBER ID<br>
+        <span id="memberId">----</span>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      BILLIONS NETWORK
+    </div>
+
+  </div>
+
+  <button class="action" id="loginBtn">
     Login with Discord
   </button>
+
 </div>
 
+<script src="script.js"></script>
 </body>
 </html>

@@ -44,6 +44,18 @@ if (params.has("username")) {
 
   memberId.textContent = `BLN-2026-${formatted}`;
 
+// ===== MEMBER NUMBER (RANDOM) =====
+const randomNumber = Math.floor(Math.random() * 9999) + 1;
+
+// #0001 формат
+const memberTag = `#${String(randomNumber).padStart(4, "0")}`;
+
+// BLN-2026-0001 формат
+const memberId = `BLN-2026-${String(randomNumber).padStart(4, "0")}`;
+
+document.getElementById("memberTag").textContent = memberTag;
+document.getElementById("memberId").textContent = memberId;
+
   // AVATAR
   avatar.textContent = "";
   avatar.style.backgroundImage =

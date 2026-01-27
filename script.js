@@ -71,11 +71,11 @@ btn.addEventListener("click", async () => {
     "👉 https://billions-member-pass.vercel.app/"
   );
 
-  // 🔹 OPEN X
-  window.open(
-    `https://twitter.com/intent/tweet?text=${text}`,
-    "_blank"
-  );
+  // ✅ FIX FOR MOBILE (ЄДИНА ЗМІНА)
+  setTimeout(() => {
+    window.location.href =
+      `https://twitter.com/intent/tweet?text=${text}`;
+  }, 300);
 });
 
 // ===== AFTER LOGIN =====

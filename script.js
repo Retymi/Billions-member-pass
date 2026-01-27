@@ -104,3 +104,13 @@ btn.addEventListener("click", async () => {
   btn.textContent = "Share on X";
   footer.style.display = "block";
 })();
+
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
+const username = params.get("username");
+
+if (id && username) {
+  document.querySelector("#pass").style.display = "block";
+  document.querySelector("#user").textContent =
+    `Connected as ${username} (ID: ${id})`;
+}

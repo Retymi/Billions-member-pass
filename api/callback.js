@@ -25,8 +25,8 @@ export default async function handler(req, res) {
 
   const user = await userRes.json();
 
-  // 👉 редірект назад на сайт з даними
+  // 👉 ЧІТКИЙ редірект на 2 сторінку
   res.redirect(
-  `/pass.html?id=${user.id}&username=${encodeURIComponent(user.username)}`
-);
-
+    `/pass.html?id=${user.id}&username=${encodeURIComponent(user.username)}&avatar=${user.avatar}`
+  );
+}

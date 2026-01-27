@@ -1,6 +1,11 @@
+import fetch from "node-fetch";
+
 export default async function handler(req, res) {
   const code = req.query.code;
-  if (!code) return res.redirect("/");
+
+  if (!code) {
+    return res.status(400).send("No code provided");
+  }
 
   const tokenRes = await fetch("https://discord.com/api/oauth2/token", {
     method: "POST",
@@ -14,15 +19,15 @@ export default async function handler(req, res) {
     })
   });
 
-  const token = await tokenRes.json();
+  const tokenData = await tokenRes.json();
 
-  if (!token.access_token) {
-    return res.status(500).send("No access token from Discord");
+  if (!tokenData.access_token) {
+    return res.status(500).json(tokenData);
   }
 
   const userRes = await fetch("https://discord.com/api/users/@me", {
     headers: {
-      Authorization: `Bearer ${token.access_token}`
+      Authorization: `Bearer ${tokenData.access_token}`
     }
   });
 

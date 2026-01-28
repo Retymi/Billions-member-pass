@@ -304,3 +304,8 @@ body {
 .card.exporting ~ .fireflies {
   display: none !important;
 }
+
+/* ===== FIX EXPORT TRANSFORM BUG ===== */
+.page.exporting {
+  transform: none !important;
+}

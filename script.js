@@ -34,8 +34,10 @@ btn.addEventListener("click", async () => {
 
   // 🔹 ЗАЛОГІНЕНИЙ → SHARE
   const card = document.querySelector(".card");
-  if (!card) {
-    alert("ERROR: card not found");
+  const page = document.querySelector(".page");
+
+  if (!card || !page) {
+    alert("ERROR: card or page not found");
     return;
   }
 
@@ -44,19 +46,25 @@ btn.addEventListener("click", async () => {
     return;
   }
 
-const canvas = await html2canvas(card, {
-  scale: window.devicePixelRatio || 1,
-  backgroundColor: "#0b1220",
-  useCORS: true
-});
+  // ✅ КЛЮЧОВИЙ ФІКС — ВИМИКАЄМО SCALE
+  page.classList.add("exporting");
+  card.classList.add("exporting");
 
-const image = canvas.toDataURL("image/jpeg", 0.95);
+  const canvas = await html2canvas(card, {
+    scale: 1,
+    backgroundColor: "#0b1220",
+    useCORS: true
+  });
 
+  card.classList.remove("exporting");
+  page.classList.remove("exporting");
+
+  const image = canvas.toDataURL("image/jpeg", 0.95);
 
   // 🔹 AUTO DOWNLOAD
   const link = document.createElement("a");
   link.href = image;
-  link.download = "billions-member-pass.png";
+  link.download = "billions-member-pass.jpg";
   link.click();
 
   // 🔹 TEXT FOR X
@@ -67,7 +75,7 @@ const image = canvas.toDataURL("image/jpeg", 0.95);
     "👉 https://billions-member-pass.vercel.app/"
   );
 
-  // ✅ FIX FOR MOBILE (ЄДИНА ЗМІНА)
+  // 🔹 MOBILE SAFE REDIRECT
   setTimeout(() => {
     window.location.href =
       `https://twitter.com/intent/tweet?text=${text}`;

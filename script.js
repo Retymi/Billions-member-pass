@@ -44,18 +44,14 @@ btn.addEventListener("click", async () => {
     return;
   }
 
-  card.classList.add("exporting");
+const canvas = await html2canvas(card, {
+  scale: window.devicePixelRatio || 1,
+  backgroundColor: "#0b1220",
+  useCORS: true
+});
 
-  const canvas = await html2canvas(card, {
-    scale: 4,
-    backgroundColor: "#050b16",
-    useCORS: true,
-    allowTaint: true
-  });
+const image = canvas.toDataURL("image/jpeg", 0.95);
 
-  card.classList.remove("exporting");
-
-  const image = canvas.toDataURL("image/png");
 
   // 🔹 AUTO DOWNLOAD
   const link = document.createElement("a");

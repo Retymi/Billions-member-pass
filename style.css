@@ -96,10 +96,7 @@ body {
   border-radius: 22px;
 
   /* ✅ FLAT BACKGROUND — БЕЗ ГРАДІЄНТА */
-  background:
-  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.007'/%3E%3C/svg%3E"),
-  #050b16;
-  border: 3px solid #f5c84b;
+  background: #050b16;;
 
   box-shadow:
     0 80px 90px rgba(0, 0, 0, 0.95),

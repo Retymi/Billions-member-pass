@@ -47,7 +47,7 @@ btn.addEventListener("click", async () => {
   card.classList.add("exporting");
 
   const canvas = await html2canvas(card, {
-    scale: 2,
+    scale: 4,
     backgroundColor: "#050b16",
     useCORS: true,
     allowTaint: true

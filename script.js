@@ -24,17 +24,7 @@ if (firefliesContainer) {
 
 // ===== BUTTON (LOGIN / SHARE) =====
 btn.addEventListener("click", async () => {
-  const params = new URLSearchParams(location.search);
-  const username = params.get("username");
-
-  if (!username) {
-    window.location.href = "/api/login";
-    return;
-  }
-
-  // 1️⃣ ТРИГЕР СЕРВЕРНОГО РЕНДЕРУ
-  window.location.href = `/api/render?user=${username}`;
-});
+  const params = new URLSearchParams(window.location.search);
 
   // 🔹 НЕ ЗАЛОГІНЕНИЙ → DISCORD LOGIN
   if (!params.has("username")) {
@@ -56,8 +46,16 @@ btn.addEventListener("click", async () => {
     return;
   }
 
-  // ✅ КЛЮЧОВИЙ ФІКС — ВИМИКАЄМО SCALE
-  page.classList.add("exporting");
+  // ===============================
+  // ✅ КЛЮЧОВИЙ ФІКС (ЄДИНА ВАЖЛИВА РІЧ)
+  // ===============================
+
+  // зберігаємо transform
+  const prevTransform = page.style.transform;
+
+  // ❗ ВИМИКАЄМО SCALE ПЕРЕД ЕКСПОРТОМ
+  page.style.transform = "none";
+
   card.classList.add("exporting");
 
   const canvas = await html2canvas(card, {
@@ -67,7 +65,9 @@ btn.addEventListener("click", async () => {
   });
 
   card.classList.remove("exporting");
-  page.classList.remove("exporting");
+
+  // 🔁 ПОВЕРТАЄМО SCALE НАЗАД
+  page.style.transform = prevTransform;
 
   const image = canvas.toDataURL("image/jpeg", 0.95);
 

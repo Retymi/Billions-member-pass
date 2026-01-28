@@ -95,9 +95,9 @@ body {
   position: relative;
   border-radius: 22px;
 
-  /* ❗ ЄДИНА КРИТИЧНА ЗМІНА — FLAT BACKGROUND */
+  border: 3px solid transparent;
   background:
-    #050b16 padding-box,
+    linear-gradient(#050b16, #000) padding-box,
     linear-gradient(
       135deg,
       #f5c84b,
@@ -105,8 +105,6 @@ body {
       #caa13d,
       #f5c84b
     ) border-box;
-
-  border: 3px solid transparent;
 
   box-shadow:
     0 80px 90px rgba(0, 0, 0, 0.95),
@@ -289,7 +287,7 @@ body {
   opacity: 0.6;
 }
 
-/* ===== EXPORT MODE ===== */
+/* ===== EXPORT MODE (FIX FOR X) ===== */
 
 .card.exporting,
 .card.exporting * {
@@ -297,12 +295,7 @@ body {
   filter: none !important;
 }
 
-/* ================= CARD LOGO ================= */
-
-.card-logo {
-  width: 50px;
-  height: 50px;
-  object-fit: contain;
-  opacity: 0.95;
-  filter: drop-shadow(0 0 8px rgba(88, 101, 242, 0.85));
+/* ✅ ЄДИНА НОВА СТРОКА — ФІКС АРТЕФАКТІВ X */
+.card.exporting {
+  background: #0b1220 !important;
 }

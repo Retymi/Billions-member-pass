@@ -95,7 +95,6 @@ body {
   position: relative;
   border-radius: 22px;
 
-  /* ✅ FLAT BACKGROUND — БЕЗ ГРАДІЄНТА */
   background: #0b1220;
 
   box-shadow:
@@ -279,14 +278,6 @@ body {
   opacity: 0.6;
 }
 
-/* ===== EXPORT MODE ===== */
-
-.card.exporting,
-.card.exporting * {
-  box-shadow: none !important;
-  filter: none !important;
-}
-
 /* ================= CARD LOGO ================= */
 
 .card-logo {
@@ -297,13 +288,19 @@ body {
   filter: drop-shadow(0 0 8px rgba(88, 101, 242, 0.85));
 }
 
-/* ===== ANTI-BANDING FIX (EXPORT ONLY) ===== */
+/* ===== EXPORT MODE — CLEAN & SAFE ===== */
 
-.card.exporting::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.007'/%3E%3C/svg%3E");
-  pointer-events: none;
-  border-radius: 22px;
+.card.exporting {
+  background: #0b1220 !important;
+  box-shadow: none !important;
+}
+
+.card.exporting * {
+  box-shadow: none !important;
+  text-shadow: none !important;
+  filter: none !important;
+}
+
+.card.exporting ~ .fireflies {
+  display: none !important;
 }

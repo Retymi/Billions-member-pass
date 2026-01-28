@@ -24,7 +24,17 @@ if (firefliesContainer) {
 
 // ===== BUTTON (LOGIN / SHARE) =====
 btn.addEventListener("click", async () => {
-  const params = new URLSearchParams(window.location.search);
+  const params = new URLSearchParams(location.search);
+  const username = params.get("username");
+
+  if (!username) {
+    window.location.href = "/api/login";
+    return;
+  }
+
+  // 1️⃣ ТРИГЕР СЕРВЕРНОГО РЕНДЕРУ
+  window.location.href = `/api/render?user=${username}`;
+});
 
   // 🔹 НЕ ЗАЛОГІНЕНИЙ → DISCORD LOGIN
   if (!params.has("username")) {
